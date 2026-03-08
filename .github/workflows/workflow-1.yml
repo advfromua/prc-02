@@ -28,7 +28,7 @@ jobs:
         with:
           node-version: '18'
       - name: Install dependencies # installing dependencies
-        run: npm ci
+        run: npm ciq
       - name: Build project
         run: npm run build
       - name: Deploy
