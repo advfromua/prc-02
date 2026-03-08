@@ -1,7 +1,19 @@
-deploy:
-    needs: job1 
+name: Event On Failure Or Success
+on:
+  workflow_run:
+    workflows: ["workflow-1"]
+    types: [completed]
+
+jobs:
+  debug_info:
     runs-on: ubuntu-latest
-    steps: 
-      - name: Debug on Failure
-        if: failure()  
+    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+    steps:
+      - name: Output Github context on failure
         run: echo "${{ toJson(github) }}"
+  successful_info:
+     run-on: ubuntu-latest
+     if: ${{ github.event.workflow_run.conclusion == 'success' }}
+     steps:
+        - name: Output Github context on success
+          run: echo "${{ toJson(github) }}"
