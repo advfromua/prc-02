@@ -1,0 +1,19 @@
+name: workflow-1
+on: workflow_dispatch
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v6
+      - name: Install Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '18'
+      - name: Install dependencies
+        run: npm ci
+      - name: Run test
+        run: npm test
+      - name: Finish the job
+        run: echo "Job 1 is finished"
