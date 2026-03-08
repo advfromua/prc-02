@@ -11,9 +11,13 @@ jobs:
     steps:
       - name: Output Github context on failure
         run: echo "${{ toJson(github) }}"
+      - name: Output workflow is over
+        run: echo "Workflow is over with failure"
   successful_info:
      runs-on: ubuntu-latest
      if: ${{ github.event.workflow_run.conclusion == 'success' }}
      steps:
         - name: Output Github context on success
           run: echo "${{ toJson(github) }}"
+        - name: Output workflow is over
+          run: echo "Workflow is over with success"
