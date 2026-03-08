@@ -1,11 +1,7 @@
-name: Event On Issues
-on:issues:
-    types: [opened, edited, milestoned]
-    jobs:
-        job1:
-            runs-on: ubuntu-latest
-            steps:
-                - name: Get code
-                  uses: actions/checkout@v6
-                - name: Output Github context of the error message
-                  run: echo "${{ toJson(github) }}"
+deploy:
+    needs: job1 
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Debug on Failure
+        if: failure()  
+        run: echo "${{ toJson(github) }}"
