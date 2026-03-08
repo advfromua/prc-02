@@ -17,3 +17,19 @@ jobs:
         run: npm test
       - name: Finish the job
         run: echo "Job 1 is finished"
+  deploy:
+    needs: job1 
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Get code # pulling the code from the repository
+        uses: actions/checkout@v6
+      - name: Install Node.js # installing node
+        uses: actions/setup-node@v6
+        with:
+          node-version: '18'
+      - name: Install dependencies # installing dependencies
+        run: npm ci
+      - name: Build project
+        run: npm run build
+      - name: Deploy
+        run: echo "Deploying..."
